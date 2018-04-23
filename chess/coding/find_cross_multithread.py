@@ -94,10 +94,10 @@ if __name__ == '__main__':
     start=time.clock()
     list_1=FindLineH(img_bin,20)
     end=time.clock()
-    print list_1
+    print (list_1)
 #    for i in list[:]:
 #        cv2.circle(img,(i[0],i[1]),10,(255,0,0),5)
-    print "time:%f s" % (end-start)
+    print ("time:%f s" % (end-start))
     for i in  list_1[:]:
         if i!=[]:
             for k in i:
