@@ -1,6 +1,10 @@
 #!python3.6
+# -*- coding: utf-8 -*-
 import struct
-def exactStock(fileName, code):
+import pdb
+import os
+import csv
+def exactStockByDay(fileName, code):
     ofile = open(fileName,'rb')
     buf=ofile.read()
     ofile.close()
@@ -38,7 +42,24 @@ def exactStock(fileName, code):
         e=e+32
         
     return items
+def writeitems2csv(items,file_path):
+    with open(file_path,'w') as csvfile:
+        spamwriter=csv.writer(csvfile)
+        for i in items:
+            spamwriter.writerow(i)
+        csvfile.flush()
+        csvfile.close()
+def tdx_lday_to_csv(source_dir_list,dest_dir):
+    for dir_i in source_dir_list:
+        for input_file in os.listdir(dir_i):
+            code=input_file.split('.')[0]
+            ouput_path=dest_dir+input_file+'.csv'
+            items=exactStockByDay(dir_i+input_file,code)
+            writeitems2csv(items,ouput_path)
 
-exactStock('sz000001.day',"000001")
+if __name__ == '__main__':
+    source_dir_list=['D:\\zd_cczq\\vipdoc\\sh\\lday\\','D:\\zd_cczq\\vipdoc\\sz\\lday\\']
+    dest_dir='D:\\stockdata\\'
+    tdx_lday_to_csv(source_dir_list,dest_dir)
 
 
