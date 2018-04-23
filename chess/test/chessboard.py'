@@ -1,0 +1,24 @@
+# -*- coding: utf-8 -*-
+import cv2
+import pdb
+img=cv2.imread('d:/chess/chessboard.png',cv2.IMREAD_GRAYSCALE)
+
+#pdb.set_trace()
+
+cv2.imshow('这个编码对吗？',img)
+
+k=cv2.waitKey(0)
+
+if k==27:
+
+    cv2.destroyAllWindows()
+
+   
+
+elif k==ord('s'):
+
+    cv2.imwrite('test.png',img)
+
+    print "OK!"
+
+    cv2.destroyAllWindows()
