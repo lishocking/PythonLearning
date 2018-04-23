@@ -15,8 +15,8 @@ req_url = "https://item.mi.com/product/6334.html"
 browser = webdriver.Firefox()
 # 开始请求
 browser.get(login_url)
-username=browser.find_element_by_id("username").send_keys("")
-passwd=browser.find_element_by_id("pwd").send_keys("")
+username=browser.find_element_by_id("username").send_keys("18500986957")
+passwd=browser.find_element_by_id("pwd").send_keys("fatboy0506")
 login=browser.find_element_by_id("login-button").submit()
 time.sleep(10)
 browser.get(req_url)
