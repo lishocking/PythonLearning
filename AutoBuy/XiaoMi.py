@@ -8,8 +8,8 @@ req_url = "https://item.mi.com/product/10000085.html"
 def openbrowser(login_url,req_url):
     browser = webdriver.Firefox()
     browser.get(login_url)
-    username=browser.find_element_by_id("username").send_keys("18500986957")
-    passwd=browser.find_element_by_id("pwd").send_keys("fatboy0506")
+    username=browser.find_element_by_id("username").send_keys("")
+    passwd=browser.find_element_by_id("pwd").send_keys("")
     login=browser.find_element_by_id("login-button").submit()
     time.sleep(4)
     browser.get(req_url)
