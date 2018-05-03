@@ -56,10 +56,18 @@ def tdx_lday_to_csv(source_dir_list,dest_dir):
             ouput_path=dest_dir+input_file+'.csv'
             items=exactStockByDay(dir_i+input_file,code)
             writeitems2csv(items,ouput_path)
+def tdx_ldayfile_to_csv(source_dir,input_file,dest_dir):
+            code=input_file.split('.')[0]
+            ouput_path=dest_dir+input_file+'.csv'
+            items=exactStockByDay(source_dir+input_file,code)
+            writeitems2csv(items,ouput_path)
 
 if __name__ == '__main__':
-    source_dir_list=['D:\\zd_cczq\\vipdoc\\sh\\lday\\','D:\\zd_cczq\\vipdoc\\sz\\lday\\']
+    source_dir_list=['C:\\zd_cczq\\vipdoc\\sh\\lday\\','C:\\zd_cczq\\vipdoc\\sz\\lday\\']
     dest_dir='D:\\stockdata\\'
-    tdx_lday_to_csv(source_dir_list,dest_dir)
+    source_dir='C:\\zd_cczq\\vipdoc\\sz\\lday\\'
+    input_file='sz002615.day'
+    #tdx_lday_to_csv(source_dir_list,dest_dir)
+    tdx_ldayfile_to_csv(source_dir,input_file,dest_dir)
 
 
