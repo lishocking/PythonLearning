@@ -92,5 +92,8 @@ class GbbqReader(object):
 
 if __name__ == '__main__':
     result = GbbqReader().get_df("D:\\TDX\\gbbq")
-    pdb.set_trace()
-    print(result)
+    #pdb.set_trace()
+    #print(result)
+    result.to_csv("D:/TDX/gbbq.csv")
+
+

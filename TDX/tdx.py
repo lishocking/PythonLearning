@@ -4,6 +4,7 @@ import struct
 import pdb
 import os
 import csv
+import threading
 def exactStockByDay(fileName, code):
     ofile = open(fileName,'rb')
     buf=ofile.read()
@@ -13,6 +14,8 @@ def exactStockByDay(fileName, code):
     b=0
     e=32
     items = list() 
+    item=['code', 'dd', 'o', 'h', 'low', 'c', 'r', 'amount', 'vol']
+    items.append(item)
     for i in range(int(no)):
         a=struct.unpack('IIIIIfII',buf[b:e])
         year = int(a[0]/10000);
@@ -49,13 +52,23 @@ def writeitems2csv(items,file_path):
             spamwriter.writerow(i)
         csvfile.flush()
         csvfile.close()
+def thr_ex_and_save(dir_i,code,out_path):
+    items=exactStockByDay(dir_i,code);
+    writeitems2csv(items,out_path);
 def tdx_lday_to_csv(source_dir_list,dest_dir):
+    threads = []
     for dir_i in source_dir_list:
         for input_file in os.listdir(dir_i):
             code=input_file.split('.')[0]
-            ouput_path=dest_dir+input_file+'.csv'
-            items=exactStockByDay(dir_i+input_file,code)
-            writeitems2csv(items,ouput_path)
+            output_path=dest_dir+input_file+'.csv'
+            #items=exactStockByDay(dir_i+input_file,code)
+
+            t1 = threading.Thread(target=thr_ex_and_save,args=(dir_i+input_file,code,output_path))
+            threads.append(t1)
+            #writeitems2csv(items,output_path)
+    for t in threads:
+        t.setDaemon(True)
+        t.start()
 def tdx_ldayfile_to_csv(source_dir,input_file,dest_dir):
             code=input_file.split('.')[0]
             ouput_path=dest_dir+input_file+'.csv'
@@ -63,11 +76,12 @@ def tdx_ldayfile_to_csv(source_dir,input_file,dest_dir):
             writeitems2csv(items,ouput_path)
 
 if __name__ == '__main__':
-    source_dir_list=['C:\\zd_cczq\\vipdoc\\sh\\lday\\','C:\\zd_cczq\\vipdoc\\sz\\lday\\']
+    
+    source_dir_list=['D:\\zd_cczq\\vipdoc\\sz\\lday\\','D:\\zd_cczq\\vipdoc\\sh\\lday\\']
     dest_dir='D:\\stockdata\\'
-    source_dir='C:\\zd_cczq\\vipdoc\\sz\\lday\\'
+    source_dir='D:\\zd_cczq\\vipdoc\\sz\\lday\\'
     input_file='sz002615.day'
-    #tdx_lday_to_csv(source_dir_list,dest_dir)
-    tdx_ldayfile_to_csv(source_dir,input_file,dest_dir)
+    tdx_lday_to_csv(source_dir_list,dest_dir)
+    #tdx_ldayfile_to_csv(source_dir,input_file,dest_dir)
 
 
