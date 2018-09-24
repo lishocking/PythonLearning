@@ -77,7 +77,7 @@ def tdx_ldayfile_to_csv(source_dir,input_file,dest_dir):
 
 if __name__ == '__main__':
     
-    source_dir_list=['D:\\zd_cczq\\vipdoc\\sz\\lday\\','D:\\zd_cczq\\vipdoc\\sh\\lday\\']
+    source_dir_list=['c:\\zd_cczq\\vipdoc\\sz\\lday\\','c:\\zd_cczq\\vipdoc\\sh\\lday\\']
     dest_dir='D:\\stockdata\\'
     source_dir='D:\\zd_cczq\\vipdoc\\sz\\lday\\'
     input_file='sz002615.day'

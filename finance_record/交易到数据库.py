@@ -28,8 +28,8 @@ if("finance.sql3" not in fl):
 币种,
 成交编号,
 股东代码,
-资金帐号
-)'''
+资金帐号,
+primary key(交割日期,成交编号))'''
     c.execute(command)
 os.chdir('./stock_finace')
 fl=os.listdir()
@@ -47,12 +47,12 @@ for i in fl:
         if cmd_l[1] in ('利息归本' , '证券转银行' ,'银行转证券'):
             cmd_l.insert(2,'')
             cmd_l.insert(2,'')
-            cmd_l.insert(-2,'')
-            cmd_l.insert(-2,'')
+            cmd_l.insert(-2,'bank'+cmd_l[1]+cmd_l[9])
+            cmd_l.insert(-2,'bank'+cmd_l[1]+cmd_l[9])
         if cmd_l[1] in ('红股入账','红利入账'):
-            cmd_l.insert(-2,'')
+            cmd_l.insert(-2,'bonus')
         cmd=str(cmd_l).strip('[]')
-        command='insert into fr values('+cmd+')'
+        command='insert or ignore into fr values('+cmd+')'
         print(command)
         c.execute(command)
     f.close()
